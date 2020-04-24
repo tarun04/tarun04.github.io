@@ -1,11 +1,17 @@
 .footer {
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 .footer-ul {
-  list-style-type: none !important;
-  padding: initial !important;
+  list-style-type: none;
+  padding: initial;
+  margin-bottom: 0;
+}
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .round-fa {

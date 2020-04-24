@@ -1,19 +1,31 @@
+@import '/app/app.css';
+@import '/theme/default-theme/theme.css';
+@import '/theme/designer/core.css';
+
 html, body {
   height: 100%;
   margin: 0;
+  /* font-family: 'Roboto', serif; */
+  font-family: 'Product Sans Regular', sans-serif;
 }
 
 .main-wrapper {
-  width: 100%;
+  
 }
 
 .navbar-wrapper {
-  width: 100%;
+  
+}
+
+.intro-wrapper {
+  height: 88.5vh;
+  text-align: center;
+}
+
+.experience-wrapper {
+  
 }
 
 .footer-wrapper {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+  
 }

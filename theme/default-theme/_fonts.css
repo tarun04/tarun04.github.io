@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Product Sans Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/ProductSans-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Product Sans Medium Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/ProductSans-Medium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Product Sans Bold';
+  font-style: normal;
+  font-weight: normal;
+  src: url('/assets/fonts/ProductSans-Bold.woff') format('woff');
+}
