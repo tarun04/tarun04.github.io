@@ -9,23 +9,9 @@ html, body {
   font-family: 'Product Sans Regular', sans-serif;
 }
 
-.main-wrapper {
-  
-}
-
-.navbar-wrapper {
-  
-}
-
-.intro-wrapper {
-  height: 88.5vh;
-  text-align: center;
-}
-
-.experience-wrapper {
-  
-}
-
-.footer-wrapper {
-  
+.flex {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

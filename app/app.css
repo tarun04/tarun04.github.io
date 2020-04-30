@@ -1,4 +1,34 @@
-@import './navbar/navbar.css';
-@import './intro/intro.css';
+@import './home/home.css';
+@import './about/about.css';
 @import './experience/experience.css';
+@import './projects/projects.css';
+@import './contact/contact.css';
 @import './footer/footer.css';
+
+.heading-container {
+  padding-top: 5rem;
+}
+
+.heading {
+  font-family: 'Product Sans Bold', sans-serif;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width:300px) {
+  .heading {
+    font-size: 24px;
+  }
+}
+  
+@media (min-width:600px) {
+  .heading {
+    font-size: 36px;
+  }
+}
+  
+@media (min-width:1000px) {
+  .heading {
+    font-size: 48px;
+  }
+}
