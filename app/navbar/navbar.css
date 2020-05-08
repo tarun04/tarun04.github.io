@@ -1,0 +1,12 @@
+nav {
+  border-bottom: 0.25rem solid #ffffff;
+}
+
+.navbar-logo {
+  width: 3rem;
+  height: 3rem;
+}
+
+.dest-link {
+  cursor: pointer;
+}

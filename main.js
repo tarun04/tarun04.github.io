@@ -1,4 +1,5 @@
 $(document).ready(() => {
+  $('.navbar-wrapper').load('/app/navbar/navbar.html');
   $('.home-wrapper').load('/app/home/home.html');
   $('.about-wrapper').load('/app/about/about.html');
   $('.experience-wrapper').load('/app/experience/experience.html');

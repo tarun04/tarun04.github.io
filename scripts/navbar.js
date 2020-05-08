@@ -40,7 +40,7 @@ setTimeout(function() {
     //Link Highlighting
     if (pos2 > $('#home').offset().top) {
       highlightLink('home');
-      $('nav').css('border-color', '#fff')
+      $('nav').css('border-color', '#ffffff')
     }
     if (pos2 > $('#about').offset().top) {
       highlightLink('about');
@@ -54,10 +54,7 @@ setTimeout(function() {
       highlightLink('projects');
       $('nav').css('border-color', '#fbbc05')
     }
-    if (
-      pos2 > $('#contact').offset().top ||
-      pos + $(window).height() === $(document).height()
-    ) {
+    if (pos2 > $('#contact').offset().top || pos + $(window).height() === $(document).height()) {
       highlightLink('contact');
       $('nav').css('border-color', '#34a853')
     }
@@ -81,8 +78,8 @@ setTimeout(function() {
   }
 
   // EVENT HANDLERS
-  $('.nav-link').click(function() {
-    var x = $('.nav-link');
+  $('.dest-link').click(function() {
+    var x = $('.dest-link');
     var anchor = $(this).attr('dest');
     $('.navbar-nav').removeClass('visible');
 
@@ -97,9 +94,5 @@ setTimeout(function() {
       },
       400
     );
-  });
-
-  $('.fa-bars').click(function() {
-    $('.navbar-nav').toggleClass('visible');
   });
 }, 3000);
