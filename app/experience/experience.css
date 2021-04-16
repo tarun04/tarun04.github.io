@@ -1,33 +1,33 @@
 .experience-container {
-  min-height: 100vh;
+	min-height: 100vh;
 }
 
-@media (min-width:300px) {
-  .experience {
-    padding: 2rem 0;
-  }
+@media (min-width: 300px) {
+	.experience-details {
+		padding: 1rem 0;
+	}
 }
-  
-@media (min-width:600px) {
-  .experience {
-    padding: 2rem 5rem;
-  }
+
+@media (min-width: 600px) {
+	.experience-details {
+		padding: 1rem 5rem;
+	}
 }
-  
-@media (min-width:1000px) {
-  .experience {
-    padding: 2rem 10rem;
-  }
+
+@media (min-width: 1000px) {
+	.experience-details {
+		padding: 1rem 10rem;
+	}
 }
 
 .company-logo {
-  width: 7.5rem;
+	width: 7.5rem;
 }
 
 .company-name {
-  padding-left: 1rem;
+	padding-left: 1rem;
 }
 
 .job-title {
-  float: right;
+	float: right;
 }
