@@ -1,3 +1,16 @@
 .projects-container {
-  height: 100vh;
+	height: 100vh;
+}
+
+.project-details {
+	padding: 2.5rem 10rem;
+}
+
+.project-img {
+	height: 250px;
+	opacity: 0.75;
+}
+
+.hidden {
+	display: none;
 }
