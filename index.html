@@ -1,71 +1,326 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<title>heythere</title>
+<html lang="en" data-theme="night">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tarun Gaddam — Senior Software Engineer</title>
+  <meta name="description" content="Tarun Gaddam: Senior Software Engineer building scalable, mission-critical logistics platforms at Tesla." />
+  <meta name="theme-color" content="#050505" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-			crossorigin="anonymous"
-		/>
-		<link
-			rel="stylesheet"
-			href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap"
-		/>
-		<link rel="stylesheet" type="text/css" href="/styles.css" />
-	</head>
-	<body>
-		<div class="main-wrapper">
-			<div class="navbar-wrapper">
-				<!-- will load navbar with js $().load() method -->
-			</div>
+  <!-- ════════ BOOT SEQUENCE ════════ -->
+  <div id="boot" class="boot" aria-hidden="true">
+    <div class="boot__terminal">
+      <div id="boot-lines" class="boot__lines"></div>
+      <div class="boot__cursor-line">
+        <span class="boot__prompt">&gt;</span>
+        <span id="boot-typing" class="boot__typing"></span>
+        <span class="boot__caret"></span>
+      </div>
+    </div>
+  </div>
 
-			<div class="home-wrapper">
-				<!-- will load home with js $().load() method -->
-			</div>
+  <!-- ════════ COMMAND PALETTE (Ctrl+K) ════════ -->
+  <div id="cmd-overlay" class="cmd-overlay" role="dialog" aria-label="Command palette">
+    <div class="cmd-box">
+      <div class="cmd-box__search">
+        <svg class="cmd-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="cmd-input" class="cmd-box__input" placeholder="Type a command..." autocomplete="off" />
+        <kbd class="cmd-kbd">ESC</kbd>
+      </div>
+      <div id="cmd-results" class="cmd-box__results"></div>
+    </div>
+  </div>
 
-			<div class="about-wrapper">
-				<!-- will load about with js $().load() method -->
-			</div>
+  <!-- ════════ AMBIENT CANVAS ════════ -->
+  <canvas id="sky-canvas" class="sky-canvas"></canvas>
 
-			<div class="experience-wrapper">
-				<!-- will load experience with js $().load() method -->
-			</div>
+  <!-- ════════ NOISE ════════ -->
+  <div class="noise" aria-hidden="true"></div>
 
-			<div class="projects-wrapper">
-				<!-- will load projects with js $().load() method -->
-			</div>
+  <!-- ════════ CUSTOM CURSOR ════════ -->
+  <div id="cursor-dot" class="cursor-dot"></div>
+  <div id="cursor-ring" class="cursor-ring"></div>
 
-			<div class="contact-wrapper">
-				<!-- will load contact with js $().load() method -->
-			</div>
+  <!-- ════════ SCROLL PROGRESS ════════ -->
+  <div id="scroll-progress" class="scroll-progress"></div>
 
-			<div class="footer-wrapper">
-				<!-- will load footer with js $().load() method -->
-			</div>
-		</div>
+  <!-- ════════ MAIN ════════ -->
+  <div id="main-content" class="main-content">
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script
-			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-			crossorigin="anonymous"
-		></script>
-		<script
-			src="https://kit.fontawesome.com/a68a71f2f2.js"
-			crossorigin="anonymous"
-		></script>
-		<script src="main.js"></script>
-		<script src="/scripts/navbar.js"></script>
-		<script src="/scripts/projects.js"></script>
-	</body>
+    <!-- NAV — Floating Island -->
+    <a href="#home" class="nav-brand magnetic" data-strength="20" id="nav-brand">
+      <svg class="brand-mark" viewBox="0 0 28 20" width="28" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 2 2 10 8 18"/><polyline points="20 2 26 10 20 18"/><line x1="17" y1="2" x2="11" y2="18"/></svg>
+    </a>
+
+    <nav id="navbar" class="nav-island">
+      <div class="nav-island__glow"></div>
+      <div class="nav-island__inner">
+        <div class="nav-island__links" id="nav-menu">
+          <div class="nav-slider" id="nav-slider"></div>
+          <a href="#home" class="nav-island__link active" data-nav-idx="0">Home</a>
+          <a href="#experience" class="nav-island__link" data-nav-idx="1">Work</a>
+          <a href="#projects" class="nav-island__link" data-nav-idx="2">Projects</a>
+          <a href="#contact" class="nav-island__link" data-nav-idx="3">Contact</a>
+        </div>
+
+        <div class="nav-island__divider"></div>
+
+        <button id="cmd-trigger" class="nav-island__btn magnetic" data-strength="12" aria-label="Search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <kbd class="kbd-shortcut">⌘K</kbd>
+        </button>
+
+        <button id="theme-toggle" class="nav-island__btn magnetic" data-strength="12" aria-label="Toggle theme">
+          <svg class="theme-icon theme-icon--sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="theme-icon theme-icon--moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+
+      <!-- Mobile burger -->
+      <button id="nav-toggle" class="nav__burger magnetic" data-strength="15" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section id="home" class="hero">
+      <div class="hero__layout container-wide">
+        <div class="hero__left">
+          <p class="hero__greeting mono anim-fade" data-delay="0" id="greeting">Good evening —</p>
+
+          <h1 class="hero__title">
+            <span class="title-line anim-reveal" data-delay="100"><span class="title-line__inner">I'm Tarun.</span></span>
+            <span class="title-line anim-reveal" data-delay="200"><span class="title-line__inner">I build the</span></span>
+            <span class="title-line anim-reveal" data-delay="300"><span class="title-line__inner accent-text">infrastructure</span></span>
+            <span class="title-line anim-reveal" data-delay="400"><span class="title-line__inner">behind the things</span></span>
+            <span class="title-line anim-reveal" data-delay="500"><span class="title-line__inner">you rely on.</span></span>
+          </h1>
+        </div>
+
+        <div class="hero__right anim-fade" data-delay="600">
+          <div class="hero__info-block">
+            <div class="info-row">
+              <span class="info-label">Status</span>
+              <span class="info-value"><span class="pulse-dot"></span> Building at <strong>Tesla</strong></span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Focus</span>
+              <span class="info-value">Logistics & Supply Chain Platforms</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Stack</span>
+              <span class="info-value">.NET · Angular · React · SQL · Azure</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Location</span>
+              <span class="info-value">Fremont, CA</span>
+            </div>
+          </div>
+
+          <div class="hero__ctas">
+            <a href="https://github.com/tarun04" target="_blank" rel="noopener" class="btn magnetic" data-strength="12">
+              <span class="btn__text">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                GitHub
+              </span>
+            </a>
+            <a href="https://www.linkedin.com/in/tarunn04" target="_blank" rel="noopener" class="btn btn--ghost magnetic" data-strength="12">
+              <span class="btn__text">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__marquee">
+        <div class="marquee__track">
+          <div class="marquee__group">
+            <span>React</span><span class="dot">·</span><span>Angular</span><span class="dot">·</span><span>TypeScript</span><span class="dot">·</span><span>Python</span><span class="dot">·</span><span>C#</span><span class="dot">·</span><span>.NET Core</span><span class="dot">·</span><span>SQL Server</span><span class="dot">·</span><span>Azure</span><span class="dot">·</span><span>Node.js</span><span class="dot">·</span><span>Docker</span><span class="dot">·</span>
+          </div>
+          <div class="marquee__group" aria-hidden="true">
+            <span>React</span><span class="dot">·</span><span>Angular</span><span class="dot">·</span><span>TypeScript</span><span class="dot">·</span><span>Python</span><span class="dot">·</span><span>C#</span><span class="dot">·</span><span>.NET Core</span><span class="dot">·</span><span>SQL Server</span><span class="dot">·</span><span>Azure</span><span class="dot">·</span><span>Node.js</span><span class="dot">·</span><span>Docker</span><span class="dot">·</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ EXPERIENCE — Horizontal Timeline ═══════ -->
+    <section id="experience" class="section xp-section">
+      <div class="container-wide">
+        <div class="section__head">
+          <span class="kicker mono">Work</span>
+          <h2 class="section__title scramble-text">Where I've Built</h2>
+        </div>
+      </div>
+
+      <div class="xp-timeline" id="xp-timeline">
+        <div class="xp-timeline__track">
+          <!-- Tesla -->
+          <article class="xp-panel tilt-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="xp-panel__inner">
+              <div class="xp-panel__top">
+                <img src="/assets/images/tesla-logo.png" alt="Tesla" class="xp-panel__logo" />
+                <div class="xp-panel__badge"><span class="pulse-dot pulse-dot--sm"></span> Now</div>
+              </div>
+              <h3 class="xp-panel__company">Tesla Motors</h3>
+              <p class="xp-panel__role">Software Developer</p>
+              <p class="xp-panel__dates mono">Jul 2021 — Present</p>
+              <div class="xp-panel__divider"></div>
+              <p class="xp-panel__focus">Transport Management System</p>
+              <ul class="xp-panel__list">
+                <li>Architected core modules of next-gen TMS for global vehicle distribution</li>
+                <li>High-throughput .NET logic processing <strong class="counter" data-target="2" data-suffix="M+">0</strong> supply chain events/day</li>
+                <li>Led PWA initiative — offline-first with full platform parity</li>
+                <li>Reduced query latency <strong class="counter" data-target="3" data-suffix="×">0</strong> via stored procedure redesign</li>
+              </ul>
+              <div class="xp-panel__tags">
+                <span class="tag">Angular</span><span class="tag">ASP.NET</span><span class="tag">SQL Server</span><span class="tag">PWA</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Gov2Biz -->
+          <article class="xp-panel tilt-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="xp-panel__inner">
+              <div class="xp-panel__top">
+                <img src="/assets/images/g2b-logo.png" alt="Gov2Biz" class="xp-panel__logo" />
+              </div>
+              <h3 class="xp-panel__company">Gov2Biz</h3>
+              <p class="xp-panel__role">Programmer Analyst</p>
+              <p class="xp-panel__dates mono">Aug 2020 — Jun 2021</p>
+              <div class="xp-panel__divider"></div>
+              <p class="xp-panel__focus">AIMS Licensing Platform</p>
+              <ul class="xp-panel__list">
+                <li>Built core modules of a government licensing SPA for state agencies</li>
+                <li>AWS Lambda + CloudWatch automations — <strong class="counter" data-target="40" data-suffix="%">0</strong> less manual intervention</li>
+                <li>RESTful service layers with ASP.NET Web API + MVC 5.0 Razor</li>
+              </ul>
+              <div class="xp-panel__tags">
+                <span class="tag">Angular</span><span class="tag">C#</span><span class="tag">Web API</span><span class="tag">AWS Lambda</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- EBE -->
+          <article class="xp-panel tilt-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="xp-panel__inner">
+              <div class="xp-panel__top">
+                <img src="/assets/images/ebe-logo.png" alt="EBE Technologies" class="xp-panel__logo" />
+              </div>
+              <h3 class="xp-panel__company">EBE Technologies</h3>
+              <p class="xp-panel__role">Web Application Developer</p>
+              <p class="xp-panel__dates mono">Sep 2018 — Jun 2020</p>
+              <div class="xp-panel__divider"></div>
+              <p class="xp-panel__focus">On Demand Orientation & Eforms</p>
+              <ul class="xp-panel__list">
+                <li>Full-stack migration: .NET Framework → Core 2.2, Angular 4 → 8 + NGRX</li>
+                <li>SSO via IdentityServer4 + Ocelot API gateway for microservices</li>
+                <li>Owned Azure DevOps CI/CD — zero-downtime deployments</li>
+              </ul>
+              <div class="xp-panel__tags">
+                <span class="tag">Angular 8</span><span class="tag">NGRX</span><span class="tag">.NET Core</span><span class="tag">Ocelot</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ PROJECTS ═══════ -->
+    <section id="projects" class="section proj-section">
+      <div class="container-wide">
+        <div class="section__head">
+          <span class="kicker mono">Projects</span>
+          <h2 class="section__title scramble-text">Things I've Made</h2>
+        </div>
+
+        <div class="proj-mosaic">
+          <article class="proj-tile proj-tile--wide tilt-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="proj-tile__inner">
+              <span class="proj-tile__num mono">01</span>
+              <h3 class="proj-tile__name">Password Manager</h3>
+              <p class="proj-tile__desc">Cross-platform credential vault with AES-256 encryption, biometric unlock, and zero-knowledge cloud sync.</p>
+              <div class="proj-tile__footer">
+                <div class="proj-tile__tags"><span class="tag">Flutter</span><span class="tag">Dart</span><span class="tag">AES-256</span><span class="tag">Firebase</span></div>
+                <a href="https://github.com/tarun04" target="_blank" rel="noopener" class="proj-tile__link magnetic" data-strength="8">Source ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj-tile tilt-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="proj-tile__inner">
+              <span class="proj-tile__num mono">02</span>
+              <h3 class="proj-tile__name">MonoRepo</h3>
+              <p class="proj-tile__desc">Production-grade monorepo with shared libs, unified pipelines, and incremental builds.</p>
+              <div class="proj-tile__footer">
+                <div class="proj-tile__tags"><span class="tag">TypeScript</span><span class="tag">Nx</span><span class="tag">Lerna</span></div>
+                <a href="https://github.com/tarun04" target="_blank" rel="noopener" class="proj-tile__link magnetic" data-strength="8">Source ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="proj-tile tilt-card" data-tilt>
+            <div class="card-glow"></div>
+            <div class="proj-tile__inner">
+              <span class="proj-tile__num mono">03</span>
+              <h3 class="proj-tile__name">Tic Tac Toe AI</h3>
+              <p class="proj-tile__desc">Unbeatable game AI with minimax + alpha-beta pruning and real-time state rendering.</p>
+              <div class="proj-tile__footer">
+                <div class="proj-tile__tags"><span class="tag">React</span><span class="tag">Minimax</span><span class="tag">CSS Grid</span></div>
+                <a href="https://github.com/tarun04" target="_blank" rel="noopener" class="proj-tile__link magnetic" data-strength="8">Source ↗</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer id="contact" class="section footer-section">
+      <div class="container-wide">
+        <div class="footer__layout">
+          <div class="footer__left">
+            <span class="kicker mono">Contact</span>
+            <h2 class="footer__heading scramble-text">Let's build<br/>something great.</h2>
+          </div>
+          <div class="footer__right">
+            <a href="mailto:tarunreddy.04@gmail.com" class="footer__link magnetic" data-strength="8">
+              <span class="footer__link-label mono">Email</span>
+              <span class="footer__link-value">tarunreddy.04@gmail.com</span>
+            </a>
+            <a href="https://github.com/tarun04" target="_blank" rel="noopener" class="footer__link magnetic" data-strength="8">
+              <span class="footer__link-label mono">GitHub</span>
+              <span class="footer__link-value">github.com/tarun04</span>
+            </a>
+            <a href="https://www.linkedin.com/in/tarunn04" target="_blank" rel="noopener" class="footer__link magnetic" data-strength="8">
+              <span class="footer__link-label mono">LinkedIn</span>
+              <span class="footer__link-value">linkedin.com/in/tarunn04</span>
+            </a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <svg class="brand-mark brand-mark--sm" viewBox="0 0 28 20" width="22" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="8 2 2 10 8 18"/><polyline points="20 2 26 10 20 18"/><line x1="17" y1="2" x2="11" y2="18"/></svg>
+          <span class="footer__copy mono">© <span id="currentYear"></span> Tarun Gaddam</span>
+          <span class="footer__theme-label mono" id="theme-label">Night Mode</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
 </html>
