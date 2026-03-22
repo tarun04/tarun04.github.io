@@ -373,33 +373,18 @@
     if (el) window.scrollTo({ top: el.offsetTop - 72, behavior: 'smooth' });
   }
 
-  // ═══════════ 5. CUSTOM CURSOR ═══════════
+  // ═══════════ 5. CUSTOM CURSOR (simplified) ═══════════
   const cursorDot = $('#cursor-dot');
-  const cursorRing = $('#cursor-ring');
 
-  if (cursorDot && cursorRing) {
-    let cx = 0, cy = 0, tx = 0, ty = 0;
-
+  if (cursorDot) {
     document.addEventListener('mousemove', e => {
-      tx = e.clientX; ty = e.clientY;
-      cursorDot.style.left = tx + 'px';
-      cursorDot.style.top = ty + 'px';
+      cursorDot.style.left = e.clientX + 'px';
+      cursorDot.style.top = e.clientY + 'px';
     });
 
-    function ringLoop() {
-      cx += (tx - cx) * 0.12;
-      cy += (ty - cy) * 0.12;
-      cursorRing.style.left = cx + 'px';
-      cursorRing.style.top = cy + 'px';
-      requestAnimationFrame(ringLoop);
-    }
-    ringLoop();
-
-    const interactives = 'a, button, .btn, .tag, .nav__link, .magnetic, input, textarea, .cmd-item';
-    document.addEventListener('mouseover', e => { if (e.target.closest(interactives)) { cursorDot.classList.add('hovering'); cursorRing.classList.add('hovering'); } });
-    document.addEventListener('mouseout', e => { if (e.target.closest(interactives)) { cursorDot.classList.remove('hovering'); cursorRing.classList.remove('hovering'); } });
-    document.addEventListener('mousedown', () => cursorRing.classList.add('clicking'));
-    document.addEventListener('mouseup', () => cursorRing.classList.remove('clicking'));
+    const interactives = 'a, button, .btn, .tag, .nav-island__link, .magnetic, input, textarea, .cmd-item';
+    document.addEventListener('mouseover', e => { if (e.target.closest(interactives)) cursorDot.classList.add('hovering'); });
+    document.addEventListener('mouseout', e => { if (e.target.closest(interactives)) cursorDot.classList.remove('hovering'); });
   }
 
   // ═══════════ 6. MAGNETIC EFFECT ═══════════

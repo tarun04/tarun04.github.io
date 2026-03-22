@@ -214,22 +214,13 @@ button{background:none;border:none;color:inherit;cursor:none;font:inherit}
 /* ═══════ CUSTOM CURSOR ═══════ */
 .cursor-dot{
   position:fixed;top:0;left:0;z-index:9998;
-  width:6px;height:6px;border-radius:50%;
+  width:5px;height:5px;border-radius:50%;
   background:var(--accent);pointer-events:none;
   transform:translate(-50%,-50%);
-  transition:width .2s,height .2s,background .3s;
+  opacity:.6;
+  transition:width .2s,height .2s,opacity .2s;
 }
-.cursor-dot.hovering{width:10px;height:10px;background:var(--text)}
-
-.cursor-ring{
-  position:fixed;top:0;left:0;z-index:9997;
-  width:36px;height:36px;border-radius:50%;
-  border:1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-  pointer-events:none;transform:translate(-50%,-50%);
-  transition:width .3s var(--ease),height .3s var(--ease),border-color .3s,opacity .3s;
-}
-.cursor-ring.hovering{width:52px;height:52px;border-color:color-mix(in srgb, var(--text) 25%, transparent)}
-.cursor-ring.clicking{width:28px;height:28px}
+.cursor-dot.hovering{width:8px;height:8px;opacity:1}
 
 /* ═══════ NOISE ═══════ */
 .noise{
